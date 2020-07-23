@@ -36,13 +36,9 @@ namespace DesignPatterns.Builder.Fluent
 
             OpenHtmlElementBlock(stringBuilder, indentLevel);
 
-            if(HasValue())
-            {
-                stringBuilder.Append($"{Value}");
-            }
+            if(HasValue()) stringBuilder.Append($"{Value}");
 
-            if (Children.Count > 0)
-                stringBuilder.Append("\n");
+            BreakLine(stringBuilder);
 
             AppendHtmlChildrenElements(indent, stringBuilder);
 
@@ -50,7 +46,13 @@ namespace DesignPatterns.Builder.Fluent
 
             return stringBuilder.ToString();
         }
-        
+
+        private void BreakLine(StringBuilder stringBuilder)
+        {
+            if (HasChildren())
+                stringBuilder.Append("\n");
+        }
+
         private void OpenHtmlElementBlock(StringBuilder stringBuilder, string indentLevel)
         {
             stringBuilder.Append($"{indentLevel}<{Tag}");
