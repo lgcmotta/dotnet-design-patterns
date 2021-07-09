@@ -20,6 +20,6 @@ namespace DesignPatterns.Builders
     {
         public string Name { get; set; }
 
-        public int Amount { get; set; }
+        public int Quantity { get; set; }
     }
 }

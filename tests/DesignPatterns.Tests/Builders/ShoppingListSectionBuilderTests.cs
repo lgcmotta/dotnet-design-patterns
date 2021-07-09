@@ -54,7 +54,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void AddingSameItemTwice_AddsAmount_Success()
+        public void AddingSameItemTwice_QuantityIsSummed_Success()
         {
             using var sectionBuilder = new ShoppingListSectionBuilder();
 
@@ -67,7 +67,7 @@ namespace DesignPatterns.Tests.Builders
             section.Items.Should()
                 .HaveCount(2)
                 .And
-                .ContainSingle(item => item.Name == "Popcorn" && item.Amount == 7);
+                .ContainSingle(item => item.Name == "Popcorn" && item.Quantity == 7);
         }
     }
 }
