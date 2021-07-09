@@ -1,11 +1,17 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Builder\FluentRecursiveGenerics\" />
+    <Compile Remove="Builder\FluentRecursiveGenerics\**" />
+    <EmbeddedResource Remove="Builder\FluentRecursiveGenerics\**" />
+    <None Remove="Builder\FluentRecursiveGenerics\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Builder\" />
   </ItemGroup>
 
 </Project>
