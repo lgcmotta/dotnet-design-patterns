@@ -5,13 +5,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Builder\FluentRecursiveGenerics\**" />
-    <EmbeddedResource Remove="Builder\FluentRecursiveGenerics\**" />
-    <None Remove="Builder\FluentRecursiveGenerics\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Builder\" />
+    <Compile Remove="Builders\FluentRecursiveGenerics\**" />
+    <EmbeddedResource Remove="Builders\FluentRecursiveGenerics\**" />
+    <None Remove="Builders\FluentRecursiveGenerics\**" />
   </ItemGroup>
 
 </Project>
