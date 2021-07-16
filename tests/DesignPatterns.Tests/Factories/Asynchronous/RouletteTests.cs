@@ -9,7 +9,7 @@ namespace DesignPatterns.Tests.Factories.Asynchronous
     public class RouletteTests
     {
         [Fact]
-        public async Task TurnTheRoulette_Success()
+        public async Task TurnTheRoulette()
         {
             var (color, number) = await Roulette.Turn();
 

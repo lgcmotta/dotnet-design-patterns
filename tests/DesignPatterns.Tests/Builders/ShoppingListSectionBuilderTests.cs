@@ -7,7 +7,7 @@ namespace DesignPatterns.Tests.Builders
     public class ShoppingListSectionBuilderTests
     {
         [Fact]
-        public void CreatingInstanceOfShoppingListSectionBuilder_Success()
+        public void CreatingInstanceOfShoppingListSectionBuilder()
         {
             using var sectionBuilder = new ShoppingListSectionBuilder();
 
@@ -15,7 +15,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void EmptyShoppingListSection_Success()
+        public void EmptyShoppingListSection()
         {
             using var sectionBuilder = new ShoppingListSectionBuilder();
 
@@ -27,7 +27,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void AddingDescriptionToShoppingListSection_Success()
+        public void AddingDescriptionToShoppingListSection()
         {
             using var sectionBuilder = new ShoppingListSectionBuilder();
 
@@ -37,7 +37,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void AddingMultipleItemsToSection_Success()
+        public void AddingMultipleItemsToSection()
         {
             using var sectionBuilder = new ShoppingListSectionBuilder();
 
@@ -54,7 +54,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void AddingSameItemTwice_QuantityIsSummed_Success()
+        public void AddingSameItemTwice_QuantityIsSummed()
         {
             using var sectionBuilder = new ShoppingListSectionBuilder();
 

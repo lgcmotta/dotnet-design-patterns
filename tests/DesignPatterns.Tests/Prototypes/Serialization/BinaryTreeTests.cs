@@ -18,7 +18,7 @@ namespace DesignPatterns.Tests.Prototypes.Serialization
         private int GetNumber() => _random.Next(0, 10001);
 
         [Fact]
-        public void CopyBinaryTree_ThroughJsonSerialization_Success()
+        public void CopyBinaryTree_ThroughJsonSerialization()
         {
             var binaryTree = new BinaryTree();
 

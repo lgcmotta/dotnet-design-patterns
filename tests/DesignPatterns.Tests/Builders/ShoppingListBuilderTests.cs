@@ -8,7 +8,7 @@ namespace DesignPatterns.Tests.Builders
     public class ShoppingListBuilderTests
     {
         [Fact]
-        public void CreatingInstanceShoppingListBuilder_DefaultConstructor_Success()
+        public void CreatingInstanceShoppingListBuilder_DefaultConstructor()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -16,7 +16,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void CreatingInstanceShoppingListBuilder_NonDefaultConstructor_Success()
+        public void CreatingInstanceShoppingListBuilder_NonDefaultConstructor()
         {
             using var shoppingListBuilder = new ShoppingListBuilder(new ShoppingListSectionBuilder());
 
@@ -24,7 +24,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void EmptyShoppingListCreated_Success()
+        public void EmptyShoppingListCreated()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -36,7 +36,7 @@ namespace DesignPatterns.Tests.Builders
         }
         
         [Fact]
-        public void AddingTitleToShoppingList_Success()
+        public void AddingTitleToShoppingList()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -50,7 +50,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void AddingSingleSectionToShoppingList_Success()
+        public void AddingSingleSectionToShoppingList()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -68,7 +68,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void AddingMultipleSectionsToShoppingList_Success()
+        public void AddingMultipleSectionsToShoppingList()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -93,7 +93,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void CreatingMultipleInstancesOfShoppingList_NotTheSameInstance_Success()
+        public void CreatingMultipleInstancesOfShoppingList_NotTheSameInstance()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -105,7 +105,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void CreatingMultipleShoppingLists_WithoutCleaningTheBuilder_Success()
+        public void CreatingMultipleShoppingLists_WithoutCleaningTheBuilder()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -117,7 +117,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void CreatingMultipleShoppingLists_CleaningTheBuilder_Success()
+        public void CreatingMultipleShoppingLists_CleaningTheBuilder()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 
@@ -131,7 +131,7 @@ namespace DesignPatterns.Tests.Builders
         }
 
         [Fact]
-        public void CreatingMultipleShoppingList_OverridingLastCall_Success()
+        public void CreatingMultipleShoppingList_OverridingLastCall()
         {
             using var shoppingListBuilder = new ShoppingListBuilder();
 

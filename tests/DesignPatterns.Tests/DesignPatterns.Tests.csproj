@@ -24,8 +24,4 @@
     <ProjectReference Include="..\..\src\DesignPatterns\DesignPatterns.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Prototypes\Cloneable\" />
-  </ItemGroup>
-
 </Project>

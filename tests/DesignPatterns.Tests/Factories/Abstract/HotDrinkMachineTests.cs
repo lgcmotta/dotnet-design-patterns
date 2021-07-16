@@ -7,7 +7,7 @@ namespace DesignPatterns.Tests.Factories.Abstract
     public class HotDrinkMachineTests
     {
         [Fact]
-        public void PrepareACoffee_Success()
+        public void PrepareACoffee()
         {
             var hotDrinkMachine = new HotDrinkMachine();
 
@@ -17,7 +17,7 @@ namespace DesignPatterns.Tests.Factories.Abstract
         }
 
         [Fact]
-        public void PrepareATea_Success()
+        public void PrepareATea()
         {
             var hotDrinkMachine = new HotDrinkMachine();
 

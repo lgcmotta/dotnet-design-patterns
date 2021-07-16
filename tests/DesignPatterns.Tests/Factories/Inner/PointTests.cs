@@ -8,7 +8,7 @@ namespace DesignPatterns.Tests.Factories.Inner
     public class PointTests
     {
         [Fact]
-        public void CreateCartesianPoint_Success()
+        public void CreateCartesianPoint()
         {
             var point = Point.Factory.NewCartesianPoint(0, 0);
 
@@ -16,7 +16,7 @@ namespace DesignPatterns.Tests.Factories.Inner
         }
 
         [Fact]
-        public void CreatePolarPoint_Success()
+        public void CreatePolarPoint()
         {
             var point = Point.Factory.NewPolarPoint(1, Math.PI / 2);
 
