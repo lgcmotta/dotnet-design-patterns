@@ -10,4 +10,8 @@
     <None Remove="Builders\FluentRecursiveGenerics\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Prototypes\" />
+  </ItemGroup>
+
 </Project>
