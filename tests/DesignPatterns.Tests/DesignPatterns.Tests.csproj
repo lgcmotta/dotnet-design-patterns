@@ -25,7 +25,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Singletons\MonoState\" />
+    <Folder Include="Behavioral\" />
+    <Folder Include="Structural\Adapters\" />
   </ItemGroup>
 
 </Project>
