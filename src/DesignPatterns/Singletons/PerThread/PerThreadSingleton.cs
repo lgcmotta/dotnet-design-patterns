@@ -2,25 +2,17 @@
 
 namespace DesignPatterns.Singletons.PerThread
 {
-    public class PerThreadCounter
+    public class PerThreadSingleton
     {
-        private int _currentCount = 0;
+        public int Id;
 
-        private static readonly ThreadLocal<PerThreadCounter> LazyCounter = new(() => new PerThreadCounter());
+        private static readonly ThreadLocal<PerThreadSingleton> ThreadInstance = new(() => new PerThreadSingleton());
 
-        public static PerThreadCounter Instance => LazyCounter.Value;
+        public static PerThreadSingleton Instance => ThreadInstance.Value;
 
-        private PerThreadCounter()
+        private PerThreadSingleton()
         {
-
+            Id = Thread.CurrentThread.ManagedThreadId;
         }
-
-        public void Increment() => _currentCount++;
-
-        public void Decrement() => _currentCount--;
-
-        public void Reset() => _currentCount = 0;
-
-        public int Count => _currentCount;
     }
 }

@@ -15,7 +15,7 @@ namespace DesignPatterns.Singletons.Lazy
 
         }
 
-        public void Increment() => _currentCount = _currentCount++;
+        public void Increment() => _currentCount++;
 
         public void Decrement() => _currentCount--;
 
