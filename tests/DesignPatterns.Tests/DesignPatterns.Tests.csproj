@@ -27,6 +27,7 @@
   <ItemGroup>
     <Folder Include="Behavioral\" />
     <Folder Include="Structural\Adapters\" />
+    <Folder Include="Structural\Bridges\" />
   </ItemGroup>
 
 </Project>
