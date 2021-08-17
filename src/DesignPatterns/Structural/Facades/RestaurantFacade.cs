@@ -17,6 +17,6 @@
 
         public IHamburger GetTripleAustralianBurger() => _hamburgerProvider.GetHamburger(3, "Australian");
 
-        public IHamburger GetSimpleBurger() => _hamburgerProvider.GetHamburger(1, "White bread");
+        public IHamburger GetSimpleBurger() => _hamburgerProvider.GetHamburger(1, "White");
     }
 }
