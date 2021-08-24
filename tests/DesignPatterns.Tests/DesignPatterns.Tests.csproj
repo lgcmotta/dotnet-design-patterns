@@ -30,7 +30,6 @@
     <Folder Include="Structural\Bridges\" />
     <Folder Include="Structural\Composites\" />
     <Folder Include="Structural\Decorator\" />
-    <Folder Include="Structural\Facades\" />
   </ItemGroup>
 
 </Project>
