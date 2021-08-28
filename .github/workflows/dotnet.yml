@@ -1,5 +1,7 @@
 name: .NET
 
+env:
+  REPO_SSH_KEY: ${{ secrets.REPO_SSH_KEY }}
 on:
   push:
     branches: [ main ]
@@ -31,12 +33,6 @@ jobs:
       run: ls /home/runner/work/dotnet-design-patterns/results
     - name: Clone repo
       run: git clone --single-branch --branch gh-page https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
-    - name: Git Config Email
-      run: git config --global user.email "luizmotta01@hotmail.com"
-    - name: Git Config User
-      run: git config --global user.name "luizmotta01"
-    - name: Clear Old Results
-      run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
@@ -44,6 +40,14 @@ jobs:
         targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
-    - name: Push Code
-      run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport && git add . && git commit -m "add reports" && git push origin gh-page
+    - name: Push Reports
+    - uses: actions/checkout@v2
+    - run: |
+          cd /home/runner/work/dotnet-design-patterns/results/coveragereport
+          git config user.email "luizmotta01@hotmail.com"
+          git config user.name "luizmotta01"
+          git add .
+          git commit -m "add reports"
+          git push origin gh-page
+      
 
