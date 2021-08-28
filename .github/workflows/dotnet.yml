@@ -40,14 +40,22 @@ jobs:
         targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
-    - uses: actions/checkout@v2
-    - name: Push Reports
+    - name: Commit files
       run: |
-          cd /home/runner/work/dotnet-design-patterns/results/coveragereport
-          git config user.email "luizmotta01@hotmail.com"
-          git config user.name "luizmotta01"
-          git add .
-          git commit -m "add reports"
-          git push origin gh-page
+        cd /home/runner/work/dotnet-design-patterns/results/coveragereport
+        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+        git config --local user.name "github-actions[bot]"
+        git commit -m "add report files" -a
+    - name: GitHub Push
+      uses: ad-m/github-push-action@v0.6.0
+      with:
+        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
+        github_token: ${{ secrets.PUSH_TOKEN }}
+        # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
+        repository: ''
+        # Destination branch to push changes
+        branch: 'gh-page'
+        # Directory to change to before pushing.
+        directory: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
       
 
