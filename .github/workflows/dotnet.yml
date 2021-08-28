@@ -32,7 +32,7 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
-        reports: /home/runner/work/dotnet-design-patterns/results/*/coverage.cobertura.xml'
+        reports: /home/runner/work/dotnet-design-patterns/results/$(ls -d */ | cut -f1 -d'/')/coverage.cobertura.xml'
         targetdir: './coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
