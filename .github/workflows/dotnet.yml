@@ -34,7 +34,7 @@ jobs:
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
-        reports: /home/runner/work/dotnet-design-patterns/results/coverage.cobertura.xml'
-        targetdir: /home/runner/work/dotnet-design-patterns/results/coveragereport
+        reports: '/home/runner/work/dotnet-design-patterns/results/coverage.cobertura.xml'
+        targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
