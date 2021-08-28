@@ -40,7 +40,7 @@ jobs:
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
         reports: '/home/runner/work/dotnet-design-patterns/results/coverage.cobertura.xml'
-        targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
+        targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport/docs'
         reporttypes: Html
         assemblyfilters: '-xunit*'
     - name: Commit new reports
