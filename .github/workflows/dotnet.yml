@@ -1,7 +1,8 @@
-name: .NET
+name: Build, Test and Publish Reports
 
 env:
   REPO_SSH_KEY: ${{ secrets.REPO_SSH_KEY }}
+  
 on:
   push:
     branches: [ main ]
@@ -32,24 +33,21 @@ jobs:
     - name: List results
       run: ls /home/runner/work/dotnet-design-patterns/results
     - name: Clone repo
-      run: git clone --single-branch --branch gh-page https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
-    - name: Remove Old Reports
+      run: | 
+        git clone --single-branch --branch gh-page https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
+    - name: Commit remove old reports
       run: |
         cd /home/runner/work/dotnet-design-patterns/results/coveragereport
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git rm *
         git commit -m "remove report files" -a
-    - name: GitHub Push
+    - name: Push remove old reports
       uses: ad-m/github-push-action@v0.6.0
       with:
-        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
         github_token: ${{ secrets.PUSH_TOKEN }}
-        # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
         repository: ''
-        # Destination branch to push changes
         branch: 'gh-page'
-        # Directory to change to before pushing.
         directory: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
@@ -58,23 +56,19 @@ jobs:
         targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
-    - name: Add New Reports
+    - name: Commit new reports
       run: |
         cd /home/runner/work/dotnet-design-patterns/results/coveragereport
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
         git add .
         git commit -m "add report files" -a
-    - name: GitHub Push
+    - name: Push new reports
       uses: ad-m/github-push-action@v0.6.0
       with:
-        # Token for the repo. Can be passed in using $\{{ secrets.GITHUB_TOKEN }}
         github_token: ${{ secrets.PUSH_TOKEN }}
-        # Repository name to push. Default or empty value represents current github repository (${GITHUB_REPOSITORY})
         repository: ''
-        # Destination branch to push changes
         branch: 'gh-page'
-        # Directory to change to before pushing.
         directory: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
       
 
