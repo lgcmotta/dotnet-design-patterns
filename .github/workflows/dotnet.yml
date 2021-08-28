@@ -28,13 +28,11 @@ jobs:
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage" -r "/home/runner/work/dotnet-design-patterns/results" --no-build --verbosity normal
     - name: Go to results dir
-      run: cd "/home/runner/work/dotnet-design-patterns/results"
-    - name: List results dir
-      run: ls
+      run: cd /home/runner/work/dotnet-design-patterns/results | ls /home/runner/work/dotnet-design-patterns/results
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
-        reports: $(pwd)'/'$(ls)'/coverage.cobertura.xml'
+        reports: /home/runner/work/dotnet-design-patterns/results/*/coverage.cobertura.xml'
         targetdir: './coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
