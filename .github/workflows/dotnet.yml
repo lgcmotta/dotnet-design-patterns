@@ -45,6 +45,8 @@ jobs:
         cd /home/runner/work/dotnet-design-patterns/results/coveragereport
         git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
         git config --local user.name "github-actions[bot]"
+        git rm *
+        git commit -m "remove old repor files" -a
         git add .
         git commit -m "add report files" -a
     - name: GitHub Push
