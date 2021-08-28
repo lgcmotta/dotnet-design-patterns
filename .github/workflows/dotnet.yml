@@ -21,16 +21,18 @@ jobs:
       run: dotnet restore
     - name: Build
       run: dotnet build --no-restore
-    - name: Remove Results Dir
-      run: rm -rf "../results"
     - name: Create Results Dir
-      run: mkdir "../results"
+      run: mkdir "/home/runner/work/dotnet-design-patterns/results"
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage" -r "/home/runner/work/dotnet-design-patterns/results" --no-build --verbosity normal
     - name: Move results
       run: find /home/runner/work/dotnet-design-patterns/results -name "coverage.cobertura.xml" -exec mv -t /home/runner/work/dotnet-design-patterns/results {} +
     - name: List results
       run: ls /home/runner/work/dotnet-design-patterns/results
+    - name: Clone repo
+      run: git clone --single-branch --branch gh-page https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
+    - name: Clear Old Results
+      run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport | git rm . | git commit -m "remove results" | git push origin gh-page
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
@@ -38,3 +40,6 @@ jobs:
         targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
+    - name: Push Code
+      run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport | git add . | git commit -m "add reports" | git push origin gh-page
+
