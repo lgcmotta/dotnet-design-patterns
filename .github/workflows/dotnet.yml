@@ -1,8 +1,5 @@
 name: Build, Test and Publish Reports
 
-env:
-  REPO_SSH_KEY: ${{ secrets.REPO_SSH_KEY }}
-  
 on:
   push:
     branches: [ main ]
