@@ -36,7 +36,7 @@ jobs:
     - name: Git Config User
       run: git config --global user.name "luizmotta01"
     - name: Clear Old Results
-      run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport && git rm * && git commit -m "remove results" && git push origin gh-page
+      run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
