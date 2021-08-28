@@ -40,9 +40,9 @@ jobs:
         targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
         reporttypes: Html
         assemblyfilters: '-xunit*'
-    - name: Push Reports
     - uses: actions/checkout@v2
-    - run: |
+    - name: Push Reports
+      run: |
           cd /home/runner/work/dotnet-design-patterns/results/coveragereport
           git config user.email "luizmotta01@hotmail.com"
           git config user.name "luizmotta01"
