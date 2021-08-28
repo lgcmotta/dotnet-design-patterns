@@ -28,7 +28,9 @@ jobs:
     - name: Test
       run: dotnet test --collect:"XPlat Code Coverage" -r "/home/runner/work/dotnet-design-patterns/results" --no-build --verbosity normal
     - name: Go to results dir
-      run: echo $(pwd) && cd "/home/runner/work/dotnet-design-patterns/results"
+      run: cd "/home/runner/work/dotnet-design-patterns/results"
+    - name: List results dir
+      run: ls
     - name: ReportGenerator
       uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
       with:
