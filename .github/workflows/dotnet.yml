@@ -31,6 +31,8 @@ jobs:
       run: ls /home/runner/work/dotnet-design-patterns/results
     - name: Clone repo
       run: git clone --single-branch --branch gh-page https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
+    - name: Git Config
+      run: git config --global user.email "luizmotta01@hotmail.com" | git config --global user.name "luizmotta01"
     - name: Clear Old Results
       run: cd /home/runner/work/dotnet-design-patterns/results/coveragereport | git rm . | git commit -m "remove results" | git push origin gh-page
     - name: ReportGenerator
