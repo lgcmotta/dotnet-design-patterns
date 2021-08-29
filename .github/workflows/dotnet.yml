@@ -31,7 +31,7 @@ jobs:
       run: ls /home/runner/work/dotnet-design-patterns/results
     - name: Clone repo
       run: | 
-        git clone --single-branch --branch gh-page https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
+        git clone --single-branch --branch gh-pages https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
     - name: Remove old reports
       run: |
         cd /home/runner/work/dotnet-design-patterns/results/coveragereport
@@ -55,7 +55,7 @@ jobs:
       with:
         github_token: ${{ secrets.PUSH_TOKEN }}
         repository: ''
-        branch: 'gh-page'
+        branch: 'gh-pages'
         directory: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
       
 
