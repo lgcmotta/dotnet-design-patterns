@@ -11,6 +11,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DesignPatterns", "src\Desig
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DesignPatterns.Tests", "tests\DesignPatterns.Tests\DesignPatterns.Tests.csproj", "{E250FB2E-D839-40E5-9E49-56468D5BE42C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6F26EAB6-DF8D-447B-94D0-0E45D32466BE}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".github", ".github", "{E7A21467-4E22-4053-B00B-325C346E3315}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "workflows", "workflows", "{C449B55F-9628-409A-B13C-C9B0DA3DCA20}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,6 +44,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3695CD4B-E7B1-4C69-BE59-1F83FCBD1261} = {052BFBE2-DD34-4112-BE1B-ED24699BC17A}
 		{E250FB2E-D839-40E5-9E49-56468D5BE42C} = {ECBB725B-5287-4593-A436-3808B15C4A5E}
+		{E7A21467-4E22-4053-B00B-325C346E3315} = {6F26EAB6-DF8D-447B-94D0-0E45D32466BE}
+		{C449B55F-9628-409A-B13C-C9B0DA3DCA20} = {E7A21467-4E22-4053-B00B-325C346E3315}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AF9FD1F0-2594-492D-A545-B3D0064E53B6}
