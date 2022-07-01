@@ -28,10 +28,10 @@ jobs:
     - name: cache SonarCloud scanner
       id: cache-sonar-scanner
       uses: actions/cache@v1
-        with:
-          path: .\.sonar\scanner
-          key: ${{ runner.os }}-sonar-scanner
-          restore-keys: ${{ runner.os }}-sonar-scanner
+      with:
+        path: .\.sonar\scanner
+        key: ${{ runner.os }}-sonar-scanner
+        restore-keys: ${{ runner.os }}-sonar-scanner
       
     - name: install SonarCloud scanner
       if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
