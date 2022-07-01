@@ -8,54 +8,46 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
+    - name: checkout
     - uses: actions/checkout@v2
-    - name: Setup .NET
-      uses: actions/setup-dotnet@v1
+    
+    - name: dotnet setup
+      uses: actions/setup-dotnet@v2
       with:
-        dotnet-version: 5.0.x
-    - name: Restore dependencies
-      run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore
-    - name: Create Results Dir
-      run: mkdir "/home/runner/work/dotnet-design-patterns/results"
-    - name: Test
-      run: dotnet test --collect:"XPlat Code Coverage" -r "/home/runner/work/dotnet-design-patterns/results" --no-build --verbosity normal
-    - name: Move results
-      run: find /home/runner/work/dotnet-design-patterns/results -name "coverage.cobertura.xml" -exec mv -t /home/runner/work/dotnet-design-patterns/results {} +
-    - name: List results
-      run: ls /home/runner/work/dotnet-design-patterns/results
-    - name: Clone repo
-      run: | 
-        git clone --single-branch --branch gh-pages https://github.com/luizmotta01/dotnet-design-patterns.git /home/runner/work/dotnet-design-patterns/results/coveragereport
-    - name: Remove old reports
-      run: |
-        cd /home/runner/work/dotnet-design-patterns/results/coveragereport
-        rm -rf *
-    - name: ReportGenerator
-      uses: danielpalme/ReportGenerator-GitHub-Action@4.5.8
+        dotnet-version: 7.0.x
+    
+    - name: cache SonarCloud packages
+      uses: actions/cache@v1
       with:
-        reports: '/home/runner/work/dotnet-design-patterns/results/coverage.cobertura.xml'
-        targetdir: '/home/runner/work/dotnet-design-patterns/results/coveragereport/docs'
-        reporttypes: Html
-        assemblyfilters: '-xunit*'
-    - name: Commit new reports
-      run: |
-        cd /home/runner/work/dotnet-design-patterns/results/coveragereport
-        git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        git add .
-        git commit -m "add report files" -a
-    - name: Push new reports
-      uses: ad-m/github-push-action@v0.6.0
-      with:
-        github_token: ${{ secrets.PUSH_TOKEN }}
-        repository: ''
-        branch: 'gh-pages'
-        directory: '/home/runner/work/dotnet-design-patterns/results/coveragereport'
+        path: ~\sonar\cache
+        key: ${{ runner.os }}-sonar
+        restore-keys: ${{ runner.os }}-sonar
+        
+    - name: cache SonarCloud scanner
+      id: cache-sonar-scanner
+      uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
       
+    - name: install SonarCloud scanner
+      if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+      run: dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+    
+    - name: dotnet restore
+      run: dotnet restore
 
+    - name: dotnet build
+      run: dotnet build --no-restore
+    
+    - name: test and analyze
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      run: |
+        ./.sonar/scanner/dotnet-sonarscanner begin /k:"Project-key" /o:"user" /d:sonar.login="${{ secrets.SONAR_TOKEN }}" /d:sonar.host.url="https://sonarcloud.io"
+        dotnet test --no-build --no-restore /p:CollectCoverage=true /p:CoverletOutputFormat=opencover -l trx
+        ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
