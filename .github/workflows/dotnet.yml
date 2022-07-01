@@ -11,12 +11,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: checkout
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
     
     - name: dotnet setup
-      uses: actions/setup-dotnet@v2
+      uses: Elskom/setup-latest-dotnet@main
       with:
-        dotnet-version: 7.0.x
+        VERSION_MAJOR: '7'
+        VERSION_MINOR: '0'
+        VERSION_BAND: '1xx'
     
     - name: cache SonarCloud packages
       uses: actions/cache@v1
