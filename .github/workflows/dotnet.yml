@@ -39,10 +39,10 @@ jobs:
       run: dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
     
     - name: dotnet restore
-      run: dotnet restore -v
+      run: dotnet restore 
 
     - name: dotnet build
-      run: dotnet build --no-restore -v
+      run: dotnet build --no-restore --verbosity diag
     
     - name: test and analyze
       env:
