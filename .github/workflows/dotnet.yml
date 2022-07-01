@@ -14,11 +14,9 @@ jobs:
       uses: actions/checkout@v3
     
     - name: dotnet setup
-      uses: Elskom/setup-latest-dotnet@main
+      uses: actions/setup-dotnet@v2
       with:
-        VERSION_MAJOR: '7'
-        VERSION_MINOR: '0'
-        VERSION_BAND: '1xx'
+        dotnet-version: 6.0.x
     
     - name: cache SonarCloud packages
       uses: actions/cache@v1
