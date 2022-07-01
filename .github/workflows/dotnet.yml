@@ -37,13 +37,7 @@ jobs:
     - name: install SonarCloud scanner
       if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
       run: dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
-    
-    - name: dotnet restore
-      run: dotnet restore 
 
-    - name: dotnet build
-      run: dotnet build --no-restore --verbosity diag
-    
     - name: test and analyze
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
