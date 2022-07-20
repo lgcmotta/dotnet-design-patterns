@@ -7,7 +7,7 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
 
-  analyze:
+  run-analysis:
     needs: build
     uses: ./.github/workflows/analysis.yml
     with:
