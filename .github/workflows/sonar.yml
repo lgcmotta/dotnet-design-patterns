@@ -76,7 +76,7 @@ jobs:
           SONAR_PROJECT_KEY: ${{ secrets.sonar-project-key }}
           SONAR_ORGANIZATION: ${{ secrets.organization }}
         run: |
-          ./.sonnar/scanner/dotnet-sonarscanner begin \
+          ./.sonar/scanner/dotnet-sonarscanner begin \
           /k:"$SONAR_PROJECT_KEY" \
           /o:"$SONAR_ORGANIZATION" \
           /d:sonar.pullrequest.key="$PR_NUMBER" \
@@ -96,7 +96,7 @@ jobs:
           SONAR_ORGANIZATION: ${{ secrets.organization }}
           BRANCH_NAME: ${{ inputs.branch-name }}
         run: |
-          ./.sonnar/scanner/dotnet-sonarscanner begin \
+          ./.sonar/scanner/dotnet-sonarscanner begin \
           /k:"$SONAR_PROJECT_KEY" \
           /o:"$SONAR_ORGANIZATION" \
           /d:sonar.branch.name="$BRANCH_NAME" \
