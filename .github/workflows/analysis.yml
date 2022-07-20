@@ -4,17 +4,17 @@ on:
   workflow_call:
     inputs:
       pull-request:
-        type: boolean
         required: true
+        type: boolean
       pull-request-base:
-        type: string
         required: false
+        type: string
       pull-request-head:
-        type: string
         required: false
+        type: string
       branch-name:
-        type: string
         required: false
+        type: string
     secrets:
       sonar-token:
         required: true
@@ -26,7 +26,7 @@ on:
         required: true
 
 jobs:
-  analyze:
+  run-analysis:
     runs-on: ubuntu-latest
 
     steps:
