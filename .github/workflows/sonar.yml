@@ -99,6 +99,8 @@ jobs:
           ./.sonar/scanner/dotnet-sonarscanner begin \
           /k:"$SONAR_PROJECT_KEY" \
           /o:"$SONAR_ORGANIZATION" \
+          /d:sonar.host.url="$SONAR_URL" \
+          /d:sonar.login="$SONAR_TOKEN" \
           /d:sonar.branch.name="$BRANCH_NAME" \
           /d:sonar.cs.opencover.reportsPaths="./tests/**/results/*.opencover.xml"
 
