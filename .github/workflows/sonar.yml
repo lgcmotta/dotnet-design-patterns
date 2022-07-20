@@ -26,7 +26,7 @@ on:
         required: true
 
 jobs:
-  run-analysis:
+  sonar:
     runs-on: ubuntu-latest
 
     steps:

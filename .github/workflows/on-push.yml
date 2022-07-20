@@ -1,12 +1,12 @@
-name: push analysis
+name: push
 
 on:
   push:
     branches: [main]
 
 jobs:
-  run-analysis:
-    uses: "./.github/workflows/analysis.yml"
+  sonar:
+    uses: ./.github/workflows/sonar.yml
     with:
       pull-request: false
       branch-name: main

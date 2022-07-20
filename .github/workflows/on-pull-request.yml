@@ -7,9 +7,9 @@ jobs:
   build:
     uses: ./.github/workflows/build.yml
 
-  run-analysis:
+  sonar:
     needs: build
-    uses: ./.github/workflows/analysis.yml
+    uses: ./.github/workflows/sonar.yml
     with:
       pull-request: true
       pull-request-base: ${{ github.event.pull_request.base.ref }}
