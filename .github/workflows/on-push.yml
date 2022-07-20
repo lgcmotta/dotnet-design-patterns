@@ -6,7 +6,7 @@ on:
 
 jobs:
   analyze:
-    uses: ./.github/workflows/analysis.yml
+    uses: ./.github/workflows/sonar.yml
     with:
       pull-request: false
       branch-name: main
