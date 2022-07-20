@@ -18,8 +18,6 @@ on:
     secrets:
       sonar-token:
         required: true
-      sonar-url:
-        required: true
       sonar-project-key:
         required: true
       sonar-organization:
@@ -82,7 +80,7 @@ jobs:
           /d:sonar.pullrequest.base="$PR_BASE" \
           /d:sonar.pullrequest.branch="$PR_HEAD" \
           /d:sonar.login="$SONAR_TOKEN" \
-          /d:sonar.host.url="$SONAR_URL" \
+          /d:sonar.host.url="https://sonarcloud.io" \
           /d:sonar.qualitygate.wait=true \
           /d:sonar.cs.opencover.reportsPaths="./tests/**/results/*.opencover.xml"
 
@@ -100,7 +98,7 @@ jobs:
           /o:"$SONAR_ORGANIZATION" \
           /d:sonar.branch.name="$BRANCH_NAME" \
           /d:sonar.login="$SONAR_TOKEN" \
-          /d:sonar.host.url="$SONAR_URL" \
+          /d:sonar.host.url="https://sonarcloud.io" \
           /d:sonar.cs.opencover.reportsPaths="./tests/**/results/*.opencover.xml"
 
       - name: run tests
