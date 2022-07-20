@@ -16,5 +16,3 @@ jobs:
       pull-request-head: ${{ github.event.pull_request.head.ref }}
     secrets:
       sonar-token: ${{ secrets.SONAR_TOKEN }}
-      sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
-      sonar-organization: ${{ secrets.SONAR_ORGANIZATION }}

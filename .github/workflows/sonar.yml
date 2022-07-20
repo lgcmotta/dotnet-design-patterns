@@ -18,10 +18,6 @@ on:
     secrets:
       sonar-token:
         required: true
-      sonar-project-key:
-        required: true
-      sonar-organization:
-        required: true
 
 jobs:
   sonar:
@@ -68,14 +64,11 @@ jobs:
           PR_NUMBER: ${{ inputs.pull-request-number }}
           PR_BASE: ${{ inputs.pull-request-base }}
           PR_HEAD: ${{ inputs.pull-request-head }}
-          SONAR_URL: ${{ secrets.sonar-url }}
           SONAR_TOKEN: ${{ secrets.sonar-token }}
-          SONAR_PROJECT_KEY: ${{ secrets.sonar-project-key }}
-          SONAR_ORGANIZATION: ${{ secrets.organization }}
         run: |
           ./.sonar/scanner/dotnet-sonarscanner begin \
-          /k:"$SONAR_PROJECT_KEY" \
-          /o:"$SONAR_ORGANIZATION" \
+          /k:"lgcmotta_dotnet-design-patterns" \
+          /o:"lgcmotta" \
           /d:sonar.pullrequest.key="$PR_NUMBER" \
           /d:sonar.pullrequest.base="$PR_BASE" \
           /d:sonar.pullrequest.branch="$PR_HEAD" \
@@ -87,15 +80,12 @@ jobs:
       - name: begin sonarcloud scan
         if: ${{ inputs.pull-request == false }}
         env:
-          SONAR_URL: ${{ secrets.sonar-url }}
           SONAR_TOKEN: ${{ secrets.sonar-token }}
-          SONAR_PROJECT_KEY: ${{ secrets.sonar-project-key }}
-          SONAR_ORGANIZATION: ${{ secrets.organization }}
           BRANCH_NAME: ${{ inputs.branch-name }}
         run: |
           ./.sonar/scanner/dotnet-sonarscanner begin \
-          /k:"$SONAR_PROJECT_KEY" \
-          /o:"$SONAR_ORGANIZATION" \
+          /k:"lgcmotta_dotnet-design-patterns" \
+          /o:"lgcmotta" \
           /d:sonar.branch.name="$BRANCH_NAME" \
           /d:sonar.login="$SONAR_TOKEN" \
           /d:sonar.host.url="https://sonarcloud.io" \
