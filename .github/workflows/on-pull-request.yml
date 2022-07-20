@@ -1,0 +1,21 @@
+name: pull request analysis
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    uses: ./.github/workflows/build.yml
+
+  analyze:
+    needs: build
+    uses: ./.github/workflows/analysis.yml
+    with:
+      pull-request: true
+      pull-request-base: ${{ github.event.pull_request.base.ref }}
+      pull-request-head: ${{ github.event.pull_request.head.ref }}
+    secrets:
+      sonar-url: ${{ secrets.SONAR_URL }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
+      sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
+      sonar-organization: ${{ secrets.SONAR_ORGANIZATION }}

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace DesignPatterns.Creational.Factories.Asynchronous
@@ -61,7 +62,7 @@ namespace DesignPatterns.Creational.Factories.Asynchronous
         public static async Task<(Color color, int number)> Turn()
         {
             await Task.Delay(10000);
-
+           
             var selectedNumber = new Random().Next(0, 33);
 
             return Slots.FirstOrDefault(slot => slot.number == selectedNumber);

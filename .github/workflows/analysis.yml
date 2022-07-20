@@ -1,0 +1,116 @@
+name: sonarcloud analysis
+
+on:
+  workflow_call:
+    inputs:
+      pull-request:
+        type: boolean
+        required: true
+      pull-request-base:
+        type: string
+        required: false
+      pull-request-head:
+        type: string
+        required: false
+      branch-name:
+        type: string
+        required: false
+    secrets:
+      sonar-token:
+        required: true
+      sonar-url:
+        required: true
+      sonar-project-key:
+        required: true
+      sonar-organization:
+        required: true
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: setup dotnet
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: 6.0.x
+
+      - name: setup java
+        uses: actions/setup-java@v3
+        with:
+          java-version: 1.11
+
+      - name: cache sonarcloud packages
+        uses: actions/@cache@v1
+        with:
+          path: ~\sonar\cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
+
+      - name: cache sonarcloud scanner
+        id: cache-sonar-scanner
+        uses: actions/cache@v1
+        with:
+          path: .\.sonar\scanner
+          key: ${{ runner.os }}-sonar-scanner
+          restore-keys: ${{ runner.os }}-sonar-scanner
+
+      - name: install sonarcloud scanner
+        if: steps.cache-sonar-scanner.outputs.cache-hit != 'true'
+        run: dotnet tool update dotnet-sonarscanner --tool-path ./.sonar/scanner
+
+      - name: begin sonarcloud scan for pull request
+        if: ${{ inputs.pull-request == true }}
+        env:
+          PR_NUMBER: ${{ inputs.pull-request-number }}
+          PR_BASE: ${{ inputs.pull-request-base }}
+          PR_HEAD: ${{ inputs.pull-request-head }}
+          SONAR_URL: ${{ secrets.sonar-url }}
+          SONAR_TOKEN: ${{ secrets.sonar-token }}
+          SONAR_PROJECT_KEY: ${{ secrets.sonar-project-key }}
+          SONAR_ORGANIZATION: ${{ secrets.organization }}
+        run: |
+          ./.sonnar/scanner/dotnet-sonnarscanner begin \
+          /k:"$SONAR_PROJECT_KEY" \
+          /o:"$SONAR_ORGANIZATION" \
+          /d:sonar.pullrequest.key="$PR_NUMBER" \
+          /d:sonar.pullrequest.base="$PR_BASE" \
+          /d:sonar.pullrequest.branch="$PR_HEAD" \
+          /d:sonar.host.url="$SONAR_URL" \
+          /d:sonar.login="$SONAR_TOKEN" \
+          /d:sonar.qualitygate.wait=true \
+          /d:sonar.cs.opencover.reportsPaths="./tests/**/results/*.opencover.xml"
+
+      - name: begin sonarcloud scan
+        if: ${{ inputs.pull-request == false }}
+        env:
+          SONAR_URL: ${{ secrets.sonar-url }}
+          SONAR_TOKEN: ${{ secrets.sonar-token }}
+          SONAR_PROJECT_KEY: ${{ secrets.sonar-project-key }}
+          SONAR_ORGANIZATION: ${{ secrets.organization }}
+          BRANCH_NAME: ${{ inputs.branch-name }}
+        run: |
+          ./.sonnar/scanner/dotnet-sonnarscanner begin \
+          /k:"$SONAR_PROJECT_KEY" \
+          /o:"$SONAR_ORGANIZATION" \
+          /d:sonar.branch.name="$BRANCH_NAME" \
+          /d:sonar.cs.opencover.reportsPaths="./tests/**/results/*.opencover.xml"
+
+      - name: run tests
+        run: |
+          dotnet test \
+          /p:CoverletOutput=./results/ \
+          /p:CollectCoverage=true \
+          /p:ExcludeByAttribute="CompilerGeneratedAttribute" \
+          /p:CoverletOutputFormat=opencover \
+          --logger "GitHubActions;report-warnings=false"
+
+      - name: end sonarcloud scan
+        env:
+          SONAR_TOKEN: ${{ secrets.sonar-token }}
+        run: ./.sonar/scanner/dotnet-sonarscanner end /d:sonar.login="$SONAR_TOKEN"

@@ -1,0 +1,17 @@
+name: push analysis
+
+on:
+  push:
+    branches: main
+
+jobs:
+  analyze:
+    uses: ./.github/workflows/analysis.yml
+    with:
+      pull-request: false
+      branch-name: main
+    secrets:
+      sonar-url: ${{ secrets.SONAR_URL }}
+      sonar-token: ${{ secrets.SONAR_TOKEN }}
+      sonar-project-key: ${{ secrets.SONAR_PROJECT_KEY }}
+      sonar-organization: ${{ secrets.SONAR_ORGANIZATION }}
