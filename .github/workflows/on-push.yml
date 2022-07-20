@@ -4,18 +4,8 @@ on:
   push:
     branches: [main]
 
-jobs:
-  checkout:
-    runs-on: ubuntu-latest
-    steps:
-      - name: checkout
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-
   analyze:
-    uses: ./.github/workflows/analysis.yml
-    needs: checkout
+    uses: "./.github/workflows/analysis.yml"
     with:
       pull-request: false
       branch-name: main
